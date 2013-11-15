@@ -74,7 +74,8 @@ LIBSSH_OBJS=authfd.o authfile.o bufaux.o bufbn.o buffer.o \
 	kexdh.o kexgex.o kexdhc.o kexgexc.o bufec.o kexecdh.o kexecdhc.o \
 	msg.o progressmeter.o dns.o entropy.o gss-genr.o umac.o umac128.o \
 	jpake.o schnorr.o ssh-pkcs11.o krl.o smult_curve25519_ref.o \
-	kexc25519.o kexc25519c.o
+	kexc25519.o kexc25519c.o chacha.o chacha20poly1305aead.o \
+	poly1305-donna-unrolled.o
 
 SSHOBJS= ssh.o readconf.o clientloop.o sshtty.o \
 	sshconnect.o sshconnect1.o sshconnect2.o mux.o \

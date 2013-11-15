@@ -104,6 +104,7 @@
 	"aes128-ctr,aes192-ctr,aes256-ctr," \
 	"arcfour256,arcfour128," \
 	AESGCM_CIPHER_MODES \
+ 	"chacha20-poly1305@openssh.com," \
 	"aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc," \
 	"aes192-cbc,aes256-cbc,arcfour,rijndael-cbc@lysator.liu.se"
 

@@ -149,7 +149,7 @@ key_private_rsa1_to_blob(Key *key, Buffer *blob, const char *passphrase,
 
 	cipher_set_key_string(&ciphercontext, cipher, passphrase,
 	    CIPHER_ENCRYPT);
-	cipher_crypt(&ciphercontext, cp,
+	cipher_crypt(&ciphercontext, 0, cp,
 	    buffer_ptr(&buffer), buffer_len(&buffer), 0, 0);
 	cipher_cleanup(&ciphercontext);
 	memset(&ciphercontext, 0, sizeof(ciphercontext));
@@ -473,7 +473,7 @@ key_parse_private_rsa1(Buffer *blob, const char *passphrase, char **commentp)
 	/* Rest of the buffer is encrypted.  Decrypt it using the passphrase. */
 	cipher_set_key_string(&ciphercontext, cipher, passphrase,
 	    CIPHER_DECRYPT);
-	cipher_crypt(&ciphercontext, cp,
+	cipher_crypt(&ciphercontext, 0, cp,
 	    buffer_ptr(&copy), buffer_len(&copy), 0, 0);
 	cipher_cleanup(&ciphercontext);
 	memset(&ciphercontext, 0, sizeof(ciphercontext));

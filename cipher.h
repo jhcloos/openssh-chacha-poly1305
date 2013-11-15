@@ -38,6 +38,8 @@
 #define CIPHER_H
 
 #include <openssl/evp.h>
+#include "chacha20poly1305aead.h"
+
 /*
  * Cipher types for SSH-1.  New types can be added, but old types should not
  * be removed for compatibility.  The maximum allowed value is 31.
@@ -65,7 +67,9 @@ struct Cipher;
 struct CipherContext {
 	int	plaintext;
 	int	encrypt;
+	int	is_cp_aead;
 	EVP_CIPHER_CTX evp;
+	struct chacha_poly_aead_ctx cp_ctx; /* XXX union with evp? */
 	const Cipher *cipher;
 };
 
@@ -78,8 +82,10 @@ int	 ciphers_valid(const char *);
 char	*cipher_alg_list(char);
 void	 cipher_init(CipherContext *, const Cipher *, const u_char *, u_int,
     const u_char *, u_int, int);
-void	 cipher_crypt(CipherContext *, u_char *, const u_char *,
+void	 cipher_crypt(CipherContext *, u_int, u_char *, const u_char *,
     u_int, u_int, u_int);
+int	 cipher_aead_get_length(CipherContext *, u_int *, u_int,
+    const u_char *, u_int);
 void	 cipher_cleanup(CipherContext *);
 void	 cipher_set_key_string(CipherContext *, const Cipher *, const char *, int);
 u_int	 cipher_blocksize(const Cipher *);
