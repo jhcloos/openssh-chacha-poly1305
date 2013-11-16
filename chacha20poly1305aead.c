@@ -23,6 +23,7 @@
 #include "log.h"
 #include "misc.h"
 #include "chacha20poly1305aead.h"
+#include "openbsd-compat/openbsd-compat.h"
 
 void cp_aead_init(struct chacha_poly_aead_ctx *ctx,
     const u_char *key, u_int keylen)
